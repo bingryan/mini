@@ -97,3 +97,4 @@ ENV/
 
 data/*
 __pycache__
+.idea
