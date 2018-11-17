@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+	<html class="lt-ie10" lang="en">
+	<![endif]-->
+	<html class="no-js" lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<title>
+				{{ title }}
+			</title>
+			<meta name="generator" content="GravCMS" />
+			<meta name="description" content="Resume is a free and responsive theme for **Grav**. Its a port of Resume template by HTML5UP."
+			/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <link href="{{ url_for('static', filename='css/foundation.css') }}" type="text/css"
+			rel="stylesheet" />
+
+            <link href="{{ url_for('static', filename='css/app.css') }}" type="text/css"
+            rel="stylesheet" />
+
+            {% block css %}
+
+            {% endblock %}
+
+		</head>
+        <body>
+        {% block header %}
+        {% endblock %}
+        <div class="row main">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        </body>
+            {% block js %}
+
+            {% endblock %}
+</html>

@@ -1,0 +1,60 @@
+{% extends "admin/index.html" %}
+{% block css %}
+    <style type="text/css">
+        .login-container{
+            position: relative;
+        }
+        .login-section{
+            width: 500px;
+        }
+        .login-section-tag{
+            position: absolute;left: 35%;margin-top: -20px;margin-left: -40px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="login-container" >
+	<div class="login-section login-section-tag" style="width: 500px; "   >
+        {% for msg in get_flashed_messages(category_filter=["err"]) %}
+            <p class="login-box-msg" style="color:red;">{{ msg }}</p>
+        {% endfor %}
+        {% for msg in get_flashed_messages(category_filter=["ok"]) %}
+            <p class="login-box-msg" style="color:green;">{{ msg }}</p>
+        {% endfor %}
+		<form name="loginform" method="POST" class="aui login-form-container">
+			<fieldset class="compact-form-fields">
+				<legend class="assistive">
+					<span>
+						登录到 后台管理
+					</span>
+				</legend>
+				<div class="field-group
+				">
+					<label id="os_username-label" for="os_username">
+						<u>
+							U
+						</u>
+						用户名
+					</label>
+					{{ form.name }}
+				</div>
+				<div class="field-group">
+					<label id="os_password-label" for="os_password">
+						<u>
+							P
+						</u>
+						密码
+					</label>
+					{{ form.pwd }}
+				</div>
+				<div class="field-group form-buttons compact-form-buttons">
+					{{ form.submit }}
+                    {{ form.csrf_token }}
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

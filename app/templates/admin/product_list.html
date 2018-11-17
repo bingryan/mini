@@ -1,0 +1,78 @@
+{% extends "admin/admin.html" %}
+{% import "ui/admin_page.html" as pg %}
+
+
+{% block content %}
+        <section class="content-header">
+            <h1>MINI微运维系统</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 项目管理</a></li>
+                <li class="active">项目列表</li>
+            </ol>
+        </section>
+        <section class="content" id="showcontent">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">项目列表</h3>
+                            <div class="box-tools">
+                                <div class="input-group input-group-sm" style="width: 250px;">
+                                    <input type="text" name="table_search" class="form-control pull-right"
+                                           placeholder="请输入项目名字">
+
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">搜索<i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body table-responsive no-padding">
+                            {% for msg in get_flashed_messages(category_filter=["success"]) %}
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-check"></i> 操作成功</h4>
+                                    {{ msg }}
+                                </div>
+                            {% endfor %}
+                            <table class="table table-hover" style="table-layout:fixed;">
+                                <tbody>
+                                <tr>
+                                    <th>项目名字</th>
+                                    <th>添加时间</th>
+                                    <th>请求URL</th>
+                                    <th width="300">部署命令</th>
+                                    <th>邮件内容</th>
+                                    <th>操作</th>
+                                </tr>
+
+                                {% for v in page_data.items %}
+                                <tr>
+                                    <td>{{ v.name }}</td>
+                                    <td>{{ v.time }}</td>
+                                    <td>{{ v.url }}</td>
+                                    <td>
+                                        <a href="#" onmouseover="display(event)" onmouseout="disappear(event)">部署代码？<code id="td-div" class="td-div">{{ v.command }}</code></a>
+
+                                    </td>
+                                    <td>
+                                        <a href="#" onmouseover="display(event)" onmouseout="disappear(event)">邮件？<code id="td-div" class="td-div">{{ v.email }}</code></a>
+
+                                    </td>
+                                    <td>
+                                        <a href="{{ url_for('admin.product_del',name=v.name) }}" class="label label-danger">删除</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="box-footer clearfix">
+                            {{ pg.page(page_data,'admin.product_list') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
